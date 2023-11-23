@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json())
 
 app.get('/', (req, res) => {
   // Set a timeout of 10 seconds
@@ -15,10 +16,22 @@ app.get('/', (req, res) => {
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
-// GET /api/users
-apiRoutes.get('/simplifyGeometry', (req, res) => {
-  console.log('TODO: Simplify geometry');
-  res.send({});
+// PUT /api/simplifyGeometry
+apiRoutes.put('/simplifyGeometry', (req, res) => {
+  // If the request body doesn't have a "url" property, return an error
+  if (!req.body.url) {
+    return res.status(400).send({
+      "status": "error",
+      "message": "Missing required property: url"
+    });
+  }
+
+  const url = req.body.url;
+  console.log(`Simplifying geometry for ${url}`);
+
+  res.send({
+    "status": "success",
+  });
 });
 
 app.listen(3005, () => {
