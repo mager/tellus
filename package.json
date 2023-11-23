@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "publish": "gcloud builds submit --tag gcr.io/geotory/tellus",
+    "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --allow-unauthenticated tellus"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
