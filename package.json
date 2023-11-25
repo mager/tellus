@@ -5,8 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts",
-    "start": "ts-node index.ts",
+    "dev": "nodemon src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "start": "ts-node src/index.ts",
     "build": "gcloud builds submit --tag gcr.io/geotory/tellus",
     "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --port 3005 --allow-unauthenticated tellus",
     "ship": "git push origin main && npm run build && npm run deploy"
@@ -26,5 +27,11 @@
   },
   "engines": {
     "node": "19.x"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "typescript": "^4.3.5"
   }
 }

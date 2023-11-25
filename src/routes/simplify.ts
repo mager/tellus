@@ -16,7 +16,6 @@ router.put("/geojson", async (req: any, res: any) => {
     const simplifiedGeometry = await simplifyGeojsonFromURL(url);
     return successResponse(res, simplifiedGeometry);
   } catch (error) {
-    console.error("Error simplifying shapefile:", error);
     return errorResponse(res, 500, "Error simplifying shapefile");
   }
 });
