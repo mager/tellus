@@ -2,10 +2,10 @@
   "name": "tellus",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "start": "nodemon index.ts",
     "publish": "gcloud builds submit --tag gcr.io/geotory/tellus",
     "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --port 3005 --allow-unauthenticated tellus",
     "ship": "git push origin main && npm run publish && npm run deploy"
@@ -24,5 +24,8 @@
   },
   "engines": {
     "node": "19.x"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
   }
 }

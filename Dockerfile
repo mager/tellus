@@ -21,4 +21,4 @@ COPY . ./
 EXPOSE 3005
 
 # Run the web service on container startup.
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start"]
