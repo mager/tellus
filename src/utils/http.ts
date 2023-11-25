@@ -11,7 +11,7 @@ export const errorResponse = (res: Response, code: number, message: string) => {
 // TODO: Fix any type
 export const successResponse = (
   res: Response,
-  data: Promise<FeatureCollection<Geometry, GeoJsonProperties>[]>
+  data: FeatureCollection<Geometry, GeoJsonProperties>[]
 ) => {
   return res.status(200).send({
     status: "success",
