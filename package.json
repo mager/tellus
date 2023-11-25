@@ -14,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/shpjs": "^3.4.6",
     "axios": "^1.6.2",
     "express": "^4.18.2",
     "geojson": "^0.5.0",
@@ -24,9 +26,5 @@
   },
   "engines": {
     "node": "19.x"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/shpjs": "^3.4.6"
   }
 }
