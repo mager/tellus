@@ -1,8 +1,8 @@
-const axios = require("axios");
-const shp = require("shpjs");
+import axios from "axios";
+import shp from "shpjs";
 const simplify = require("simplify-geojson");
 
-export const simplifyGeojsonFromURL = async (url) => {
+export const simplifyGeojsonFromURL = async (url: string) => {
   if (!url.endsWith(".zip")) {
     throw new Error("URL must end in .zip");
   }

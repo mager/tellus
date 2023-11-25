@@ -4,7 +4,8 @@ const { errorResponse, successResponse } = require("../utils/http");
 
 const router = express.Router();
 
-router.put("/geojson", async (req, res) => {
+// TODO: Fix any type
+router.put("/geojson", async (req: any, res: any) => {
   const { url } = req.body;
 
   if (!url) {

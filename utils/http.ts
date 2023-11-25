@@ -1,19 +1,16 @@
+import type { Response } from "express";
 
-const errorResponse = (res, code, message) => {
-    return res.status(code).send({
-        "status": "error",
-        "message": message
-    });
-}
+export const errorResponse = (res: Response, code: number, message: string) => {
+  return res.status(code).send({
+    status: "error",
+    message: message,
+  });
+};
 
-const successResponse = (res, data) => {
-    return res.status(200).send({
-        "status": "success",
-        "data": data
-    });
-}
-
-module.exports = {
-    errorResponse,
-    successResponse
-}
+// TODO: Fix any type
+export const successResponse = (res: Response, data: any) => {
+  return res.status(200).send({
+    status: "success",
+    data: data,
+  });
+};
