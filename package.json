@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.ts",
+    "dev": "nodemon index.ts",
+    "start": "ts-node index.ts",
     "build": "gcloud builds submit --tag gcr.io/geotory/tellus",
     "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --port 3005 --allow-unauthenticated tellus",
     "ship": "git push origin main && npm run build && npm run deploy"
@@ -16,11 +17,9 @@
     "axios": "^1.6.2",
     "express": "^4.18.2",
     "geojson": "^0.5.0",
-    "mapshaper": "^0.6.50",
     "nodemon": "^3.0.1",
     "shpjs": "^4.0.4",
-    "simplify-geojson": "^1.0.5",
-    "unzipper": "^0.10.14"
+    "simplify-geojson": "^1.0.5"
   },
   "engines": {
     "node": "19.x"
