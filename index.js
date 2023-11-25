@@ -2,7 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const { exec } = require('child_process');
 const shp = require('shpjs');
-const simplify = require('simplify-geojson')
+const simplify = require('simplify-geojson');
+
+const { errorResponse, successResponse } = require('./util')
 
 // Setup Express app
 const app = express();
@@ -14,12 +16,9 @@ app.use(express.json())
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
-apiRoutes.put('/simplifyGeometry', async (req, res) => {
+apiRoutes.put('/simplify/geojson', async (req, res) => {
   if (!req.body.url) {
-    return res.status(400).send({
-      "status": "error",
-      "message": "Missing required property: url"
-    });
+    return errorResponse(res, 400, 'url');
   }
 
   const url = req.body.url;
@@ -27,25 +26,16 @@ apiRoutes.put('/simplifyGeometry', async (req, res) => {
 
   // If the URL doesn't end in .zip, return an error
   if (!url.endsWith('.zip')) {
-    return res.status(400).send({
-      "status": "error",
-      "message": "URL must end in .zip"
-    });
+    return errorResponse(res, 400, 'url must end in .zip');
   }
 
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     const data = await shp(response.data);
-    return res.status(200).send({
-      "status": "success",
-      "data": simplify(data, 0.01)
-    });
+    return successResponse('success', simplify(data, 0.01));
   } catch (error) {
     console.error('Error getting shapefile:', error);
-    return res.status(500).send({
-      "status": "error",
-      "message": "Error getting shapefile"
-    });
+    return errorResponse(res, 500, 'Error getting shapefile');
   }
 
 });

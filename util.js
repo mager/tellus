@@ -54,4 +54,18 @@ const handleZipFile = async (zipFilePath, tempDir) => {
             const outputGeoJSONPath = `${tempDir}/output.geojson`;
             mapshaper(shapefilePath, outputGeoJSONPath);
         });
-} 
+}
+
+export const errorResponse = (res, code, message) => {
+    return res.status(code).send({
+        "status": "error",
+        "message": message
+    });
+}
+
+export const successResponse = (res, data) => {
+    return res.status(200).send({
+        "status": "success",
+        "data": data
+    });
+}
