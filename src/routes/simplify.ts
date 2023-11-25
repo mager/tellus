@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
+import type { Request, Response } from "express";
 import { simplifyGeojsonFromURL } from "../utils/simplify";
-const { errorResponse, successResponse } = require("../utils/http");
+import { errorResponse, successResponse } from "../utils/http";
 
 const router = express.Router();
 
-// TODO: Fix any type
-router.put("/geojson", async (req: any, res: any) => {
+router.put("/geojson", async (req: Request, res: Response) => {
   const { url } = req.body;
 
   if (!url) {
