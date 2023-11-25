@@ -2,7 +2,6 @@ import axios from "axios";
 import shp from "shpjs";
 import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
 
-// @ts-expect-error Need to replace this
 const simplify = require("simplify-geojson");
 
 export const simplifyGeojsonFromURL = async (
