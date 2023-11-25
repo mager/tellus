@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.ts",
-    "publish": "gcloud builds submit --tag gcr.io/geotory/tellus",
+    "build": "gcloud builds submit --tag gcr.io/geotory/tellus",
     "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --port 3005 --allow-unauthenticated tellus",
-    "ship": "git push origin main && npm run publish && npm run deploy"
+    "ship": "git push origin main && npm run build && npm run deploy"
   },
   "author": "",
   "license": "ISC",
