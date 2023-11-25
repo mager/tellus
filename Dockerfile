@@ -1,5 +1,13 @@
-FROM node:19-alpine
-WORKDIR /app
-COPY package.json .
+FROM node:19
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
 RUN npm install --omit=dev
-CMD ["npm", "start"]
+
+COPY . ./
+
+EXPOSE 3005
+
+CMD ["ts-node", "index.ts"]
