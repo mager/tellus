@@ -5,7 +5,7 @@ import { errorResponse, successResponse } from "../utils/http";
 
 const router = express.Router();
 
-router.put("/geojson", async (req: Request, res: Response) => {
+router.post("/geojson", async (req: Request, res: Response) => {
   const { url } = req.body;
 
   if (!url) {
