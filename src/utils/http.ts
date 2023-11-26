@@ -13,8 +13,5 @@ export const successResponse = (
   res: Response,
   data: FeatureCollection<Geometry, GeoJsonProperties>[]
 ) => {
-  return res.status(200).send({
-    status: "success",
-    data: data,
-  });
+  return res.status(200).send(data);
 };
