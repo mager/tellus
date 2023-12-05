@@ -23,6 +23,8 @@ export const simplifyShapefileV2 = async (url: string) => {
     throw new Error("URL must end in .zip");
   }
 
+  console.log(`Simplifying shapefile! URL: ${url}`);
+
   const response = await axios.get(url, { responseType: "arraybuffer" });
   const data = (await shp(response.data)) as FeatureCollection<
     Geometry,
