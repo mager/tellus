@@ -1,6 +1,5 @@
 import axios from "axios";
 const shp = require("shpjs");
-// import turf from "@turf/turf";
 import type { FeatureCollection, Geometry, GeoJsonProperties } from "geojson";
 
 const simplify = require("simplify-geojson");
@@ -31,5 +30,26 @@ export const simplifyShapefileV2 = async (url: string) => {
     GeoJsonProperties
   >[];
 
-  return simplify(data, 0.01);
+  const simplified = simplify(data, 0.01);
+
+  return removeInvalidMultiPolygons(simplified);
+};
+
+const removeInvalidMultiPolygons = (data: any) => {
+  data.features.filter((feature: any) => {
+    if (feature.geometry.type !== "MultiPolygon") {
+      return true; // Keep features that are not MultiPolygons
+    }
+
+    // Filter invalid polygons within the MultiPolygon
+    feature.geometry.coordinates = feature.geometry.coordinates.filter(
+      (polygon: any) => {
+        return polygon.every((ring: any) => ring.length >= 4); // Ensure all rings have at least 4 points
+      }
+    );
+
+    // Remove the entire feature if it has no valid polygons left
+    return feature.geometry.coordinates.length > 0;
+  });
+  return data;
 };

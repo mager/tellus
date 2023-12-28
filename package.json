@@ -8,9 +8,9 @@
     "dev": "nodemon src/index.ts",
     "lint": "eslint src/**/*.ts",
     "start": "ts-node src/index.ts",
-    "build": "gcloud builds submit --tag gcr.io/geotory/tellus",
+    "publish": "gcloud builds submit --tag gcr.io/geotory/tellus",
     "deploy": "gcloud run deploy --image gcr.io/geotory/tellus --platform managed --region us-central1 --port 3005 --allow-unauthenticated tellus",
-    "ship": "git push origin main && npm run build && npm run deploy"
+    "ship": "npm run publish && npm run deploy"
   },
   "author": "",
   "license": "ISC",
