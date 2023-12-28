@@ -31,8 +31,8 @@ export const simplifyShapefileV2 = async (url: string) => {
   >[];
 
   const simplified = simplify(data, 0.01);
-
-  return removeInvalidMultiPolygons(simplified);
+  const withValidPolygons = removeInvalidPolygons(simplified);
+  return removeInvalidMultiPolygons(withValidPolygons);
 };
 
 const removeInvalidMultiPolygons = (data: any) => {
@@ -45,6 +45,25 @@ const removeInvalidMultiPolygons = (data: any) => {
     feature.geometry.coordinates = feature.geometry.coordinates.filter(
       (polygon: any) => {
         return polygon.every((ring: any) => ring.length >= 4); // Ensure all rings have at least 4 points
+      }
+    );
+
+    // Remove the entire feature if it has no valid polygons left
+    return feature.geometry.coordinates.length > 0;
+  });
+  return data;
+};
+
+const removeInvalidPolygons = (data: any) => {
+  data.features.filter((feature: any) => {
+    if (feature.geometry.type !== "Polygon") {
+      return true; // Keep features that are not Polygons
+    }
+
+    // Filter invalid polygons within the MultiPolygon
+    feature.geometry.coordinates = feature.geometry.coordinates.filter(
+      (ring: any) => {
+        return ring.length >= 4; // Ensure all rings have at least 4 points
       }
     );
 
